@@ -25,6 +25,9 @@ export default ({ edit }) => {
         <Form.Item label='Celular' name='celular'>
           <Input size='large' />
         </Form.Item>
+        <Form.Item label='Email' name='email'>
+          <Input size='large' />
+        </Form.Item>
         <Form.Item label='Dirección' name='direccion'>
           <Input size='large' />
         </Form.Item>

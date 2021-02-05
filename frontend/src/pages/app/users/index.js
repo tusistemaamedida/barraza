@@ -31,7 +31,7 @@ const { Header, Footer, Sider, Content } = Layout;
 export default (params) => {
   const [drawenUser, setDrawenUser] = useState(false);
   const { data, isLoading, error } = useQuery(
-    "articles",
+    "users",
     requestParser("GET", "https://jsonplaceholder.typicode.com/users")
   );
 

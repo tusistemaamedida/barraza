@@ -48,7 +48,7 @@ export default () => {
         </Menu.Item>
 
         <Menu.Item
-          key='4'
+          key='5'
           icon={<LogoutOutlined className={styles.iconSidebar} />}
         >
           <Link to='/'>Salir</Link>

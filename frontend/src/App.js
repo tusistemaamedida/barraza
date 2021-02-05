@@ -27,7 +27,7 @@ function App() {
         <Route path='/home' exact component={Dashboard} />
         <Route path='/users' exact component={Users} />
       </Switch>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/*  <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
