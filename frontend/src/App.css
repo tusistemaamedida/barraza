@@ -1,0 +1,57 @@
+@import '~antd/dist/antd.css';
+
+body {
+  font-family: "Montserrat" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #002438 !important;
+  font-weight: 500 !important;
+}
+
+.ant-layout {
+  min-height: 100vh !important;
+}
+
+.ant-input-affix-wrapper > input.ant-input {
+  height: 25px !important;
+}
+
+.ant-btn {
+  height: 44px;
+  border: none !important;
+}
+
+.ant-btn-primary {
+  background-color:  #282E37;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.ant-btn-primary:focus {
+  background-color: #58595a77;
+}
+
+.ant-btn-primary:hover {
+  background-color: #54595e;
+}
+
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: #cd164f !important;
+}
+
+.ant-drawer-content-wrapper{
+  min-width: 520px;
+}
+
+label{
+  font-size: 13px !important;
+  color: #8d8c8c !important;
+}
+
+
+@media screen and (max-width: 520px){
+  .ant-drawer-content-wrapper {
+      width: 100%;
+  }
+}
