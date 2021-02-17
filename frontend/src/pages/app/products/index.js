@@ -24,7 +24,7 @@ import { useQuery } from "react-query";
 import styles from "../app.module.css";
 import AppLayout from "../../../layouts/app/app";
 import { requestParser } from "../../../utils";
-import UserForm from "./userForm";
+import ProductForm from "./productForm";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -38,7 +38,7 @@ export default (params) => {
   return (
     <AppLayout>
       <Header className={styles.navTop}>
-        <div className={styles.titleNav}>USUARIOS</div>
+        <div className={styles.titleNav}>PRODUCTOS</div>
       </Header>
       <Content className={styles.content}>
         <div className={styles.navAction}>
@@ -68,13 +68,13 @@ export default (params) => {
                     <Row className={styles.headerTable}>
                       <Col md={2} xs={24} sm={24}></Col>
                       <Col md={6} xs={24} sm={24}>
-                        Nombre completo
+                        Código
                       </Col>
                       <Col md={5} xs={24} sm={24}>
-                        Documento
+                        Descripción
                       </Col>
                       <Col md={5} xs={24} sm={24}>
-                        Rol
+                        Insumo
                       </Col>
                       <Col md={4} xs={24} sm={24}>
                         Estado
@@ -143,7 +143,7 @@ export default (params) => {
         onClose={() => setDrawenUser(false)}
         className={styles.drawer}
       >
-        <UserForm edit={false} />
+        <ProductForm edit={false} />
       </Drawer>
     </AppLayout>
   );

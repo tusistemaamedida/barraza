@@ -31,7 +31,7 @@ export default () => {
           key='2'
           icon={<GoldOutlined className={styles.iconSidebar} />}
         >
-          Productos
+          <Link to='/products'>Productos</Link>
         </Menu.Item>
         <Menu.Item
           key='3'
