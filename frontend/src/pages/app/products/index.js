@@ -74,10 +74,10 @@ export default (params) => {
                         Descripción
                       </Col>
                       <Col md={5} xs={24} sm={24}>
-                        Insumo
+                        Cod. artículo GS1
                       </Col>
                       <Col md={4} xs={24} sm={24}>
-                        Estado
+                        Cod. caja GS1
                       </Col>
                       <Col md={2} xs={24} sm={24}></Col>
                     </Row>
