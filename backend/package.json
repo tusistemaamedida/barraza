@@ -4,7 +4,7 @@
   "description": "Backend MERN Barraza",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/index",
+    "dev": "nodemon index",
     "start": "node server/index.js"
   },
   "author": "Iván D. Fontana (sistemasdev.com)",

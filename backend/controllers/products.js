@@ -1,12 +1,12 @@
 const moment = require('moment');
 const Products = require('../models/products');
 
-async function getAllSuppliess(req){
+async function getAll(req){
   let {pagination}= req.body
   return await Products.find({deleted_at: null}).skip(pagination.from).limit(pagination.limit)
 }
 
-async function getSuppliesById(id)
+async function getById(id)
 {
   return await Products.find({_id: id, deleted_at : null})
 }
@@ -43,9 +43,9 @@ async function deleted(id){
 }
 
 module.exports ={
-  getAllSuppliess,
+  getAll,
   save,
-  getSuppliesById,
+  getById,
   update,
   deleted
 }

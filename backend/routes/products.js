@@ -10,7 +10,7 @@ const util = require('../controllers/util')
 routes.get('/:id', async (req, resp)=>{
   try {
     let {id}= req.params
-    let data = await ctrProducts.getSuppliesById(id)
+    let data = await ctrProducts.getById(id)
     resp.status(200).send(util.getSuccessMsg(data, 200))
   } catch (error) {
     resp.status(500).send(util.getErrorMsg(error))
@@ -19,7 +19,7 @@ routes.get('/:id', async (req, resp)=>{
 
 routes.get('/', pagination, async (req, resp)=>{
   try {
-    let data = await ctrProducts.getAllSuppliess(req)
+    let data = await ctrProducts.getAll(req)
     resp.status(200).send(util.getSuccessMsg(data, 200))
   } catch (error) {
     resp.status(500).send(util.getErrorMsg(error))
