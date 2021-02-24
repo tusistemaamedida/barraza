@@ -48,7 +48,7 @@ const UploadInput = ({ state, setState }) => {
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>Select File</Button>
+      <Button icon={<UploadOutlined />}>Seleccione una imagen</Button>
     </Upload>
   );
 };

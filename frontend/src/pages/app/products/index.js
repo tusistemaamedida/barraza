@@ -10,6 +10,7 @@ import {
   List,
   Menu,
   Row,
+  Tabs,
   Tag,
 } from "antd";
 import {
@@ -24,10 +25,10 @@ import { useQuery } from "react-query";
 import styles from "../app.module.css";
 import AppLayout from "../../../layouts/app/app";
 import { requestParser } from "../../../utils";
-import ProductForm from "./productForm";
+import ProductForm from "./drawers/productForm";
 
 const { Header, Footer, Sider, Content } = Layout;
-
+const { TabPane } = Tabs;
 export default (params) => {
   const [drawenUser, setDrawenUser] = useState(false);
   const { data, isLoading, error } = useQuery(
@@ -41,7 +42,18 @@ export default (params) => {
         <div className={styles.titleNav}>PRODUCTOS</div>
       </Header>
       <Content className={styles.content}>
-        <div className={styles.navAction}>
+        <Tabs defaultActiveKey='1' type='line' size='large'>
+          <TabPane tab='Productos' key='1'>
+            Productos
+          </TabPane>
+          <TabPane tab='Establecimientos' key='2'>
+            Establecimientos
+          </TabPane>
+          <TabPane tab='Envasados' key='3'>
+            Envasados
+          </TabPane>
+        </Tabs>
+        {/* <div className={styles.navAction}>
           <div className={styles.actionButtonsNav}>
             <Button
               onClick={() => setDrawenUser(true)}
@@ -82,7 +94,6 @@ export default (params) => {
                       <Col md={2} xs={24} sm={24}></Col>
                     </Row>
                   </Col>
-                  {/* <Col span={2}></Col> */}
                 </Row>
               </List.Item>
               <Divider />
@@ -132,11 +143,10 @@ export default (params) => {
                     </Col>
                   </Row>
                 </Col>
-                {/* <Col span={2}></Col> */}
               </Row>
             </List.Item>
           )}
-        />
+        /> */}
       </Content>
       <Drawer
         visible={drawenUser}
