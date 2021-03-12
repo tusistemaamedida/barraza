@@ -1,64 +1,67 @@
-.navTop{
-    background-color: transparent;
-    border-bottom: 1px solid #B9B9B9;
-
+.navTop {
+  background-color: transparent;
+  border-bottom: 1px solid #b9b9b9;
 }
 
-.navTop .titleNav{
-    font-size: 20px;
-    padding: 10px 30px;
-    font-weight: 700;
-    line-height: 30px;
-    text-align: right;
-    color: #959595;
+.navTop .titleNav {
+  font-size: 20px;
+  padding: 10px 30px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: right;
+  color: #959595;
 }
 
-.content{
-    margin: 50px 10px;
+.content {
+  margin: 50px 10px;
 }
 
-h1{
-    font-size: 3.4em;
-    font-weight: 700;
+h1 {
+  font-size: 3.4em;
+  font-weight: 700;
 }
-h3{
-    font-size: 2em;
+h3 {
+  font-size: 2em;
 }
 
-.dashboardInfoCard{
-    height: 240px;
-    overflow: hidden;
-    padding: 0px !important;
-    border-radius: 23px;
+.dashboardInfoCard {
+  height: 240px;
+  overflow: hidden;
+  padding: 0px !important;
+  border-radius: 23px;
 }
-.dashboardInfoCard div{
-    padding: 0px !important;
+.dashboardInfoCard div {
+  padding: 0px !important;
 }
 
 .dashboardInfoCard h4 {
-    padding: 20px;
-    color: #cd164f !important;
-    font-size: 20px;
-    font-weight: 600;
+  padding: 20px;
+  color: #cd164f !important;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .dashboardInfoCard img {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
-.navAction{
-    width: 100%;
-    display: inline-block;
-    padding: 10px 30px;
+.navAction {
+  width: 100%;
+  display: inline-block;
+  padding: 10px 30px;
 }
 
-.actionButtonsNav{
-    text-align: right;
+.actionButtonsNav {
+  text-align: right;
 }
 
 .headerTable {
-    font-weight: 700;
-    font-size: 16px;
+  font-weight: 700;
+  font-size: 16px;
 }
 
+.boardContainer {
+  background-color: #eff2f5 !important;
+  height: 430px !important;
+}

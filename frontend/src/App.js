@@ -17,6 +17,7 @@ import Dashboard from "./pages/app/dashboard";
 import { Route, Switch } from "react-router-dom";
 import Users from "./pages/app/users";
 import Products from "./pages/app/products";
+import Deposit from "./pages/app/deposit";
 
 const queryClient = new QueryClient();
 const queryCache = new QueryCache();
@@ -28,6 +29,7 @@ function App() {
         <Route path='/home' exact component={Dashboard} />
         <Route path='/users' exact component={Users} />
         <Route path='/products' exact component={Products} />
+        <Route path='/deposit' exact component={Deposit} />
       </Switch>
       {/*  <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>

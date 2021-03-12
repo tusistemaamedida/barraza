@@ -1,25 +1,5 @@
 import React, { useState } from "react";
-import {
-  Avatar,
-  Button,
-  Col,
-  Divider,
-  Drawer,
-  Dropdown,
-  Layout,
-  List,
-  Menu,
-  Row,
-  Tabs,
-  Tag,
-} from "antd";
-import {
-  DeleteOutlined,
-  DownOutlined,
-  EditOutlined,
-  LoadingOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { Drawer, Layout, Tabs } from "antd";
 import { useQuery } from "react-query";
 
 import styles from "../app.module.css";

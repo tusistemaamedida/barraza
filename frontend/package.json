@@ -13,6 +13,7 @@
     "react-query": "^3.7.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-trello": "^2.2.10",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
