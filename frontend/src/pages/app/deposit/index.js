@@ -25,10 +25,10 @@ export default (params) => {
             cards: [
               {
                 id: "123033320",
-                title: "Cod: 23303233",
-                description: "200 x Queso barra 3kg.",
+                title: "Pallet 1",
+                description: "200 x Queso barra 3kg., 200 x Queso barra 3kg.",
                 label: "5 mins",
-                draggable: true,
+                draggable: false,
               },
               {
                 id: "Card2",
@@ -93,7 +93,12 @@ export default (params) => {
               {
                 id: "123033320",
                 title: "Cod: 23303233",
-                description: "200 x Queso barra 3kg.",
+                description: (
+                  <>
+                    <p>200 x Queso barra 3kg.</p>
+                    <p>3 x Queso barra 33kg.</p>
+                  </>
+                ),
                 label: "5 mins",
                 draggable: true,
               },
