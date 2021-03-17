@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "605228647ec757edb7c3520b"
+  },
+  "lanes": [
+    {
+      "id": "lane1",
+      "title": "Altura 1",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane2",
+      "title": "Altura 2",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane3",
+      "title": "Altura 3",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane4",
+      "title": "Altura 4",
+      "label": "0/0",
+      "cards": []
+    }
+  ],
+  "street": "1",
+  "column": "B",
+  "deleted_at": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "605231e109ed3c1b4bb788d3"
+  },
+  "lanes": [
+    {
+      "id": "lane1",
+      "title": "Altura A",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane2",
+      "title": "Altura 2",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane3",
+      "title": "Altura 3",
+      "label": "0/0",
+      "cards": []
+    },
+    {
+      "id": "lane4",
+      "title": "Altura 4",
+      "label": "0/0",
+      "cards": []
+    }
+  ],
+  "street": "1",
+  "column": "A",
+  "deleted_at": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6052322709ed3c1b4bb788d4"
+  },
+  "lanes": [
+    {
+      "id": "lane0",
+      "title": "Pallets disponibles",
+      "label": "2",
+      "cards": [
+        {
+          "id": "123033320",
+          "title": "Cod: 23303233",
+          "description": "200 x Queso barra 3kg.",
+          "label": "5 mins",
+          "draggable": true
+        },
+        {
+          "id": "Card2",
+          "title": "Pay Rent",
+          "description": "Transfer via NEFT",
+          "label": "15 mins",
+          "metadata": {
+            "sha": "be312a1"
+          }
+        },
+        {
+          "id": "Card3",
+          "title": "Pay Rent",
+          "description": "Transfer via NEFT",
+          "label": "15 mins",
+          "metadata": {
+            "sha": "be312a1"
+          }
+        },
+        {
+          "id": "Card4",
+          "title": "Pay Rent",
+          "description": "Transfer via NEFT",
+          "label": "15 mins",
+          "metadata": {
+            "sha": "be312a1"
+          }
+        }
+      ]
+    }
+  ],
+  "street": "0",
+  "column": "0",
+  "deleted_at": null,
+  "__v": 0
+}]

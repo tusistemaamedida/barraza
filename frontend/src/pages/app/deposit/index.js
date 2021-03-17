@@ -6,13 +6,21 @@ import AppLayout from "../../../layouts/app/app";
 import { requestParser } from "../../../utils";
 import { Option } from "antd/lib/mentions";
 import BoardComponent from "./board";
+import { useQuery } from "react-query";
 
 const { Header, Content } = Layout;
 const { TabPane } = Tabs;
 
 export default (params) => {
-  const [selectedItem, setSelectedItem] = useState({ street: 1, column: "B" });
-  const [data, setData] = useState([
+  const [loading, setLoading] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({
+    street: "1",
+    column: "B",
+  });
+  const [
+    data,
+    setData,
+  ] = useState(/* [
     {
       columnId: "A",
       streetId: 1,
@@ -219,7 +227,92 @@ export default (params) => {
         ],
       },
     },
-  ]);
+  ] */);
+
+  /* console.log(
+    JSON.stringify([
+      {
+        id: "lane0",
+        title: "Pallets disponibles",
+        label: "2",
+        cards: [
+          {
+            id: "123033320",
+            title: "Cod: 23303233",
+            description: "200 x Queso barra 3kg.",
+            label: "5 mins",
+            draggable: true,
+          },
+          {
+            id: "Card2",
+            title: "Pay Rent",
+            description: "Transfer via NEFT",
+            label: "15 mins",
+            metadata: { sha: "be312a1" },
+          },
+          {
+            id: "Card3",
+            title: "Pay Rent",
+            description: "Transfer via NEFT",
+            label: "15 mins",
+            metadata: { sha: "be312a1" },
+          },
+          {
+            id: "Card4",
+            title: "Pay Rent",
+            description: "Transfer via NEFT",
+            label: "15 mins",
+            metadata: { sha: "be312a1" },
+          },
+        ],
+      },
+      {
+        id: "lane1",
+        title: "Altura 1",
+        label: "0/0",
+        cards: [],
+      },
+      {
+        id: "lane2",
+        title: "Altura 2",
+        label: "0/0",
+        cards: [],
+      },
+      {
+        id: "lane3",
+        title: "Altura 3",
+        label: "0/0",
+        cards: [],
+      },
+      {
+        id: "lane4",
+        title: "Altura 4",
+        label: "0/0",
+        cards: [],
+      },
+    ])
+  ); */
+  const { data: dataCurrentDeposit, isLoading: lCD, refetch } = useQuery(
+    "depositCurrent",
+    requestParser("GET", "http://localhost:3100/v1/deposits", selectedItem),
+    {
+      onSuccess() {
+        setLoading(false);
+      },
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const { data: dataAvailable, isLoading: lDA } = useQuery(
+    "depositAvailable",
+    requestParser("GET", "http://localhost:3100/v1/deposits", {
+      street: "0",
+      column: "0",
+    }),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const [retenidos, setRetenidos] = useState({
     lanes: [
@@ -313,7 +406,7 @@ export default (params) => {
     },
   ];
 
-  const onSetData = (obj) => {
+  /*   const onSetData = (obj) => {
     var currentLane = data.filter((d) => d.columnId == selectedItem.column)[0]
       .lanesData;
     console.log(currentLane);
@@ -326,10 +419,17 @@ export default (params) => {
           columns.droppable = true;
         }
 
-        /* columns.cards.lenght > 0 && console.log("tiene mas de uno"); */
-        /* */
+        columns.cards.lenght > 0 && console.log("tiene mas de uno");
       }
     });
+  }; */
+
+  const onChangeModule = (obj) => {
+    setLoading(true);
+    setSelectedItem(obj);
+    setTimeout(() => {
+      refetch();
+    }, 1000);
   };
 
   return (
@@ -338,7 +438,7 @@ export default (params) => {
         <Select
           style={{ width: "200px", marginTop: "10px", float: "left" }}
           defaultValue={selectedItem.street}
-          onChange={(e) => setSelectedItem({ ...setSelectedItem, street: e })}
+          onChange={(e) => onChangeModule({ ...selectedItem, street: e })}
         >
           <Option value='1'>Calle 1</Option>
           <Option value='2'>Calle 2</Option>
@@ -346,7 +446,7 @@ export default (params) => {
         <Select
           style={{ width: "200px", marginTop: "10px", float: "left" }}
           defaultValue={selectedItem.column}
-          onChange={(e) => setSelectedItem({ ...setSelectedItem, column: e })}
+          onChange={(e) => onChangeModule({ ...selectedItem, column: e })}
         >
           <Option value='A'>Columna A</Option>
           <Option value='B'>Columna B</Option>
@@ -355,11 +455,17 @@ export default (params) => {
       </Header>
       <Content className={styles.content}>
         <BoardComponent
-          onSetData={onSetData}
-          data={
-            data.filter((d) => d.columnId == selectedItem.column)[0].lanesData
-          }
-          id={selectedItem.column}
+          data={{
+            lanes:
+              lDA || lCD || loading
+                ? [{ id: "cargando", title: "Cargando depósito..", cards: [] }]
+                : [
+                    ...dataAvailable.body[0].lanes,
+                    ...dataCurrentDeposit.body[0].lanes,
+                  ],
+          }}
+          column={selectedItem.column}
+          street={selectedItem.street}
         />
       </Content>
     </AppLayout>

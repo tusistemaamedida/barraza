@@ -11,13 +11,23 @@ const getArticles = async () => {
 
 const toJSON = (_) => _.json();
 
-export default (type, url) => {
+export default (type, url, params) => {
   var http = {
     GET: async () => {
-      console.log("object");
+      try {
+        var objUrl = new URL(url);
+        objUrl.search = new URLSearchParams(params).toString();
 
-      const fetcher = await fetch(url).then(toJSON);
-      return fetcher;
+        var requestOptions = {
+          method: "GET",
+        };
+
+        const fetcher = await fetch(objUrl, requestOptions).then(toJSON);
+
+        return fetcher;
+      } catch (e) {
+        console.log(e);
+      }
     },
   };
   const result = http[type];

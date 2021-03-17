@@ -26,11 +26,11 @@ import AppLayout from "../../../layouts/app/app";
 import { requestParser } from "../../../utils";
 import UserForm from "./userForm";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 export default (params) => {
   const [drawenUser, setDrawenUser] = useState(false);
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading } = useQuery(
     "users",
     requestParser("GET", "https://jsonplaceholder.typicode.com/users")
   );
