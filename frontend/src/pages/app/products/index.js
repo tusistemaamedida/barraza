@@ -6,6 +6,7 @@ import styles from "../app.module.css";
 import AppLayout from "../../../layouts/app/app";
 import { requestParser } from "../../../utils";
 import ProductForm from "./drawers/productForm";
+import Lots from "./lots";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { TabPane } = Tabs;
@@ -22,14 +23,17 @@ export default (params) => {
         <div className={styles.titleNav}>PRODUCTOS</div>
       </Header>
       <Content className={styles.content}>
-        <Tabs defaultActiveKey='1' type='line' size='large'>
-          <TabPane tab='Productos' key='1'>
+        <Tabs defaultActiveKey='1' type='card' size='large'>
+          <TabPane tab='Lotes' key='1'>
+            <Lots />
+          </TabPane>
+          <TabPane tab='Productos' key='2'>
             Productos
           </TabPane>
-          <TabPane tab='Establecimientos' key='2'>
+          <TabPane tab='Establecimientos' key='3'>
             Establecimientos
           </TabPane>
-          <TabPane tab='Envasados' key='3'>
+          <TabPane tab='Envasados' key='4'>
             Envasados
           </TabPane>
         </Tabs>

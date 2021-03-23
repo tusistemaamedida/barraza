@@ -9,27 +9,15 @@ import React from "react";
 
 import styles from "../app.module.css";
 
+const mockData = [{}];
+
 export default (params) => {
   return (
-    /*   <div className={styles.navAction}>
-        <div className={styles.actionButtonsNav}>
-          <Button
-            onClick={() => setDrawenUser(true)}
-            style={{ float: "right" }}
-            type='primary'
-          >
-            Nuevo
-          </Button>
-        </div>
-      </div> */
-
     <List
       loading={{
-        spinning: isLoading,
         indicator: <LoadingOutlined type='loading' />,
       }}
       loa
-      data={data}
       header={
         <>
           <List.Item style={{ padding: "10px 20px" }}>
@@ -57,18 +45,12 @@ export default (params) => {
           <Divider />
         </>
       }
-      dataSource={data}
       renderItem={(item) => (
         <List.Item style={{ padding: "10px 20px" }}>
           <Row style={{ width: "100%" }} gutter={20}>
             <Col span={24}>
               <Row align='middle'>
-                <Col md={2} xs={24} sm={24}>
-                  <Avatar
-                    icon={<UserOutlined />}
-                    style={{ backgroundColor: "#001529" }}
-                  />
-                </Col>
+                <Col md={2} xs={24} sm={24}></Col>
                 <Col md={6} xs={24} sm={24}>
                   {item.name}
                 </Col>
