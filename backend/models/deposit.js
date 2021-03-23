@@ -13,8 +13,17 @@ let deposit = new Schema({
         type: String,
         required: [true, 'Se requiere una column']
     },
-    cards: {
-        type: Array
+    title:{
+        type: String
+    },
+    description:{
+        type: String
+    },
+    label: {
+        type: String
+    },
+    position: {
+        type: String
     },
     deleted_at :{
         type: Date,
