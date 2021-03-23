@@ -20,8 +20,11 @@ async function save(body){
     let supplie = new Deposits({
       "street": body.street,
       "column": body.column,
-      "cards": body.cards,
-      "deleted_at":null
+      "title":body.title,
+      "description": body.description,
+      "label": body.label,
+      "deleted_at":null,
+      "position":body.position
     })
     return await supplie.save()
   }
@@ -36,22 +39,13 @@ async function validate(street, column){
 }
 
 async function updateCard(body, id){
-  let data = await Deposits.findOne({_id: id,
-    deleted_at : null})
-    console.log(data.cards)
-    let ok = true
-    for(let card of data.cards){
-      if(card.column === body.column){
-        ok = false
-      }
-      if(card.id === body.id){
-        card.column = body.column
-      }
-    }
-    if(ok){
-      return await Deposits.updateOne({_id: id, deleted_at:null}, data)
-    }
-    return ok
+  let ok = false
+  let count = await Deposits.count({street: body.street, column: body.column, position: body.position})
+  if(count === 0){
+    ok =true
+    return await Deposits.updateOne({_id: id, deleted_at:null}, body)
+  }
+  return ok
 }
 
 
