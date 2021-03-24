@@ -6,54 +6,63 @@ import {
   GoldOutlined,
   UserSwitchOutlined,
   LogoutOutlined,
+  AppstoreOutlined,
+  AppstoreAddOutlined,
 } from "@ant-design/icons";
 
 import styles from "./index.module.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 export default () => {
-  return (
-    <>
-      <Menu
-        theme='dark'
-        mode='inline'
-        className={styles.menuSidebarLeft}
-        defaultSelectedKeys={["1"]}
-      >
-        <Menu.Item
-          style={{ marginTop: "90px" }}
-          key='1'
-          icon={<DashboardOutlined size={50} className={styles.iconSidebar} />}
-        >
-          <Link to='/home'>Inicio</Link>
-        </Menu.Item>
-        <Menu.Item
-          key='2'
-          icon={<GoldOutlined className={styles.iconSidebar} />}
-        >
-          <Link to='/products'>Productos</Link>
-        </Menu.Item>
-        <Menu.Item
-          key='3'
-          icon={<UserSwitchOutlined className={styles.iconSidebar} />}
-        >
-          <Link to='/users'>Usuarios</Link>
-        </Menu.Item>
-        <Divider />
-        <Menu.Item
-          key='4'
-          icon={<UserOutlined className={styles.iconSidebar} />}
-        >
-          Mi perfil
-        </Menu.Item>
+  const location = useLocation();
 
-        <Menu.Item
-          key='5'
-          icon={<LogoutOutlined className={styles.iconSidebar} />}
-        >
-          <Link to='/'>Salir</Link>
-        </Menu.Item>
-      </Menu>
-    </>
+  return (
+    <Menu
+      theme='dark'
+      mode='inline'
+      className={styles.menuSidebarLeft}
+      defaultSelectedKeys={["/home"]}
+      selectedKeys={[location.pathname]}
+    >
+      <Menu.Item
+        style={{ marginTop: "90px" }}
+        key='/home'
+        icon={<DashboardOutlined size={50} className={styles.iconSidebar} />}
+      >
+        <NavLink to='/home'>Inicio</NavLink>
+      </Menu.Item>
+      <Menu.Item
+        key='/products'
+        icon={<AppstoreAddOutlined className={styles.iconSidebar} />}
+      >
+        <NavLink to='/products'>Productos</NavLink>
+      </Menu.Item>
+      <Menu.Item
+        key='/deposit'
+        icon={<AppstoreOutlined className={styles.iconSidebar} />}
+      >
+        <NavLink to='/deposit'>Depósito</NavLink>
+      </Menu.Item>
+      <Menu.Item
+        key='/users'
+        icon={<UserSwitchOutlined className={styles.iconSidebar} />}
+      >
+        <NavLink to='/users'>Usuarios</NavLink>
+      </Menu.Item>
+      <Divider />
+      <Menu.Item
+        key='/profile'
+        icon={<UserOutlined className={styles.iconSidebar} />}
+      >
+        Mi perfil
+      </Menu.Item>
+
+      <Menu.Item
+        key='6'
+        icon={<LogoutOutlined className={styles.iconSidebar} />}
+      >
+        <NavLink to='/'>Salir</NavLink>
+      </Menu.Item>
+    </Menu>
   );
 };

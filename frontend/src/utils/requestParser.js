@@ -12,6 +12,7 @@ const getArticles = async () => {
 const toJSON = (_) => _.json();
 
 export default (type, url, params) => {
+  var result = null;
   var http = {
     GET: async () => {
       try {
@@ -29,8 +30,29 @@ export default (type, url, params) => {
         console.log(e);
       }
     },
+    PUT: async () => {
+      try {
+        var formdata = new FormData();
+        Object.keys(params).map((p) => formdata.append(p, params[p]));
+        var requestOptions = {
+          method: "PUT",
+          body: formdata,
+          redirect: "follow",
+        };
+
+        const fetcher = await fetch(url, requestOptions);
+        return fetcher;
+      } catch (e) {
+        console.log(e);
+      }
+    },
   };
-  const result = http[type];
+
+  if (type === "GET") {
+    result = http[type];
+  } else {
+    result = http[type]();
+  }
 
   return result;
 };

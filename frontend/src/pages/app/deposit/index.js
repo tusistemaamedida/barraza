@@ -9,402 +9,100 @@ import BoardComponent from "./board";
 import { useQuery } from "react-query";
 
 const { Header, Content } = Layout;
-const { TabPane } = Tabs;
 
 export default (params) => {
   const [loading, setLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
     street: "1",
-    column: "B",
+    column: "A",
   });
-  const [
-    data,
-    setData,
-  ] = useState(/* [
-    {
-      columnId: "A",
-      streetId: 1,
-      lanesData: {
-        lanes: [
-          {
-            id: "lane0",
-            title: "Pallets disponibles",
-            label: "2",
-            cards: [
-              {
-                id: "123033320",
-                title: "Pallet 1",
-                description: "200 x Queso barra 3kg., 200 x Queso barra 3kg.",
-                label: "5 mins",
-                draggable: false,
-              },
-              {
-                id: "Card2",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card3",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card4",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-            ],
-          },
-          {
-            id: "lane1",
-            title: "Altura 1",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane2",
-            title: "Altura 2",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane3",
-            title: "Altura 3",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane4",
-            title: "Altura 4",
-            label: "0/0",
-            cards: [],
-          },
-        ],
-      },
-    },
-    {
-      columnId: "B",
-      streetId: 1,
-      lanesData: {
-        lanes: [
-          {
-            id: "lane0",
-            title: "Pallets disponibles",
-            label: "2",
-            cards: [
-              {
-                id: "123033320",
-                title: "Cod: 23303233",
-                description: (
-                  <>
-                    <p>200 x Queso barra 3kg.</p>
-                    <p>3 x Queso barra 33kg.</p>
-                  </>
-                ),
-                label: "5 mins",
-                draggable: true,
-              },
-              {
-                id: "Card2",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card3",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card4",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-            ],
-          },
-          {
-            id: "lane1",
-            title: "Altura 1",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane2",
-            title: "Altura 2",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane3",
-            title: "Altura 3",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane4",
-            title: "Altura 4",
-            label: "0/0",
-            cards: [],
-          },
-        ],
-      },
-    },
-    {
-      columnId: "C",
-      streetId: 1,
-      lanesData: {
-        lanes: [
-          {
-            id: "lane0",
-            title: "Pallets disponibles",
-            label: "2",
-            cards: [
-              {
-                id: "123033320",
-                title: "Cod: 23303233",
-                description: "200 x Queso barra 3kg.",
-                label: "5 mins",
-                draggable: true,
-              },
-              {
-                id: "Card2",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card3",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-              {
-                id: "Card4",
-                title: "Pay Rent",
-                description: "Transfer via NEFT",
-                label: "15 mins",
-                metadata: { sha: "be312a1" },
-              },
-            ],
-          },
-          {
-            id: "lane1",
-            title: "Altura 1",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane2",
-            title: "Altura 2",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane3",
-            title: "Altura 3",
-            label: "0/0",
-            cards: [],
-          },
-          {
-            id: "lane4",
-            title: "Altura 4",
-            label: "0/0",
-            cards: [],
-          },
-        ],
-      },
-    },
-  ] */);
+  const [palletsAvailable, setPalletsAvailable] = useState([]);
+  const [palletsCurrent, setPalletsCurrent] = useState([]);
 
-  /* console.log(
-    JSON.stringify([
-      {
-        id: "lane0",
-        title: "Pallets disponibles",
-        label: "2",
-        cards: [
-          {
-            id: "123033320",
-            title: "Cod: 23303233",
-            description: "200 x Queso barra 3kg.",
-            label: "5 mins",
-            draggable: true,
-          },
-          {
-            id: "Card2",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-          {
-            id: "Card3",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-          {
-            id: "Card4",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-        ],
-      },
-      {
-        id: "lane1",
-        title: "Altura 1",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane2",
-        title: "Altura 2",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane3",
-        title: "Altura 3",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane4",
-        title: "Altura 4",
-        label: "0/0",
-        cards: [],
-      },
-    ])
-  ); */
-  const { data: dataCurrentDeposit, isLoading: lCD, refetch } = useQuery(
+  const { isLoading: lCD, refetch } = useQuery(
     "depositCurrent",
     requestParser("GET", "http://localhost:3100/v1/deposits", selectedItem),
     {
-      onSuccess() {
+      onSuccess({ body }) {
+        setLoading(true);
+
+        var pallets = [];
+        //creo cada carril (currentLane) de la fila y columna correspondiente (de 1 a 4)
+        ["1", "2", "3", "4"].map((currentLane) => {
+          let currentCard = body.filter(
+            (card) => card.position === currentLane
+          )[0];
+          if (currentCard) {
+            const { _id, title, description, label } = currentCard;
+            pallets.push({
+              id: currentLane,
+              title: `Altura ${currentLane}`,
+              cards: [
+                {
+                  id: _id,
+                  title,
+                  description,
+                  label,
+                },
+              ],
+            });
+          } else {
+            pallets.push({
+              id: currentLane,
+              title: `Altura ${currentLane}`,
+              cards: [],
+            });
+          }
+        });
+        setPalletsCurrent(pallets);
         setLoading(false);
+
+        setTimeout(() => {
+          console.log(palletsCurrent);
+        }, 5000);
       },
       refetchOnWindowFocus: false,
     }
   );
 
-  const { data: dataAvailable, isLoading: lDA } = useQuery(
+  const { isLoading: lDA, refetch: refecthAvailable } = useQuery(
     "depositAvailable",
     requestParser("GET", "http://localhost:3100/v1/deposits", {
       street: "0",
       column: "0",
     }),
     {
+      onSuccess({ body }) {
+        setLoading(true);
+        //transformamos la data en columnas de los boards
+        if (body.length > 0) {
+          setPalletsAvailable({
+            id: "0",
+            title: "Pallets Disponibles",
+            cards: body.map((pd) => {
+              const { _id, title, description, label, draggable } = pd;
+              return {
+                id: _id,
+                title,
+                description,
+                label,
+                draggable,
+                collasabel: false,
+              };
+            }),
+          });
+        } else {
+          setPalletsAvailable({
+            id: "0",
+            title: "Pallets Disponibles",
+            cards: [],
+          });
+        }
+        setLoading(false);
+      },
       refetchOnWindowFocus: false,
     }
   );
-
-  const [retenidos, setRetenidos] = useState({
-    lanes: [
-      {
-        id: "lane0",
-        title: "Pallets disponibles",
-        label: "2",
-        cards: [
-          {
-            id: "123033320",
-            title: "Cod: 23303233",
-            description: "200 x Queso barra 3kg.",
-            label: "5 mins",
-            draggable: true,
-          },
-          {
-            id: "Card2",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-          {
-            id: "Card3",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-          {
-            id: "Card4",
-            title: "Pay Rent",
-            description: "Transfer via NEFT",
-            label: "15 mins",
-            metadata: { sha: "be312a1" },
-          },
-        ],
-      },
-      {
-        id: "lane1",
-        title: "Altura 1",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane2",
-        title: "Altura 2",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane3",
-        title: "Altura 3",
-        label: "0/0",
-        cards: [],
-      },
-      {
-        id: "lane4",
-        title: "Altura 4",
-        label: "0/0",
-        cards: [],
-      },
-    ],
-  });
-
-  const columns = [
-    {
-      id: "A",
-      data,
-      setData,
-    },
-    {
-      id: "B",
-      data,
-      setData,
-    },
-    {
-      id: "C",
-      data,
-      setData,
-    },
-    {
-      id: "D",
-      data,
-      setData,
-    },
-    {
-      id: "E",
-      data: retenidos,
-      setData: setRetenidos,
-    },
-  ];
 
   /*   const onSetData = (obj) => {
     var currentLane = data.filter((d) => d.columnId == selectedItem.column)[0]
@@ -429,6 +127,7 @@ export default (params) => {
     setSelectedItem(obj);
     setTimeout(() => {
       refetch();
+      refecthAvailable();
     }, 1000);
   };
 
@@ -459,10 +158,7 @@ export default (params) => {
             lanes:
               lDA || lCD || loading
                 ? [{ id: "cargando", title: "Cargando depósito..", cards: [] }]
-                : [
-                    ...dataAvailable.body[0].lanes,
-                    ...dataCurrentDeposit.body[0].lanes,
-                  ],
+                : [palletsAvailable, ...palletsCurrent],
           }}
           column={selectedItem.column}
           street={selectedItem.street}
