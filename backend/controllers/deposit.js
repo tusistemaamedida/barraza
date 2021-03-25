@@ -43,8 +43,9 @@ async function validate(street, column) {
 async function updateCard(body, id) {
   const { street, column, position } = body;
   let ok = false;
+  let count = 0;
   if (street != 0 && column != 0 && position != 0) {
-    let count = await Deposits.count({
+    count = await Deposits.count({
       street: street,
       column: column,
       position: position,

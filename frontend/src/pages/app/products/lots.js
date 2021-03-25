@@ -4,20 +4,45 @@ import {
   EditOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
-import { Button, Col, Divider, Dropdown, List, Menu, Row, Tag } from "antd";
+import {
+  Button,
+  Col,
+  Divider,
+  Dropdown,
+  List,
+  Menu,
+  Row,
+  Spin,
+  Tag,
+} from "antd";
 import React from "react";
+import { useQuery } from "react-query";
+import { requestParser } from "../../../utils";
 
 import styles from "../app.module.css";
 
-const mockData = [{}];
-
 export default (params) => {
+  const { data, isLoading } = useQuery(
+    "lots",
+    requestParser("GET", "http://localhost:3100/v1/lots"),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  if (isLoading) {
+    return (
+      <Spin
+        indicator={<LoadingOutlined type='loading' />}
+        spinning={true}
+        className={styles.indicator}
+      />
+    );
+  }
+
   return (
     <List
-      loading={{
-        indicator: <LoadingOutlined type='loading' />,
-      }}
-      loa
+      dataSource={data.body}
       header={
         <>
           <List.Item style={{ padding: "10px 20px" }}>
@@ -26,16 +51,16 @@ export default (params) => {
                 <Row className={styles.headerTable}>
                   <Col md={2} xs={24} sm={24}></Col>
                   <Col md={6} xs={24} sm={24}>
-                    Código
+                    Pallets
                   </Col>
                   <Col md={5} xs={24} sm={24}>
-                    Descripción
+                    Estado
                   </Col>
                   <Col md={5} xs={24} sm={24}>
-                    Cod. artículo GS1
+                    Última nota
                   </Col>
                   <Col md={4} xs={24} sm={24}>
-                    Cod. caja GS1
+                    Fecha ingreso
                   </Col>
                   <Col md={2} xs={24} sm={24}></Col>
                 </Row>
@@ -47,21 +72,27 @@ export default (params) => {
       }
       renderItem={(item) => (
         <List.Item style={{ padding: "10px 20px" }}>
+          {console.log(item)}
           <Row style={{ width: "100%" }} gutter={20}>
             <Col span={24}>
               <Row align='middle'>
                 <Col md={2} xs={24} sm={24}></Col>
                 <Col md={6} xs={24} sm={24}>
-                  {item.name}
+                  {item.pallets.map((p) => (
+                    <>
+                      {p}
+                      <br />
+                    </>
+                  ))}
                 </Col>
                 <Col md={5} xs={24} sm={24}>
-                  {item.phone}
+                  {item.status}
                 </Col>
                 <Col md={5} xs={24} sm={24}>
-                  Empleado
+                  {item.notes}
                 </Col>
                 <Col md={4} xs={24} sm={24}>
-                  <Tag color='#2db7f5'>ACTIVO</Tag>
+                  {item.createdAt}
                 </Col>
                 <Col md={2} xs={24} sm={24}>
                   <Dropdown

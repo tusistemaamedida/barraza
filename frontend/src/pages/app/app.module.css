@@ -65,3 +65,7 @@ h3 {
   background-color: #eff2f5 !important;
   height: 430px !important;
 }
+
+.indicator {
+  padding: 20vh 0px 0px 50%;
+}

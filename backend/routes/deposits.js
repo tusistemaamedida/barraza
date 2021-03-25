@@ -44,8 +44,8 @@ routes.put("/card/:id", async (req, resp) => {
     let data = await ctrDeposits.updateCard(body, id);
     if (data === false) {
       return resp
-        .status(200)
-        .send(util.getSuccessMsg("Hay un registro en la misma columna", 200));
+        .status(403)
+        .send(util.getSuccessMsg("Hay un registro en la misma columna", 403));
     }
     return resp.status(200).send(util.getSuccessMsg("Register updated", 201));
   } catch (error) {

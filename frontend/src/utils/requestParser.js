@@ -1,14 +1,3 @@
-/* const toJSON = (_) => _.json();
-export default (type, url) => {
-
-    
-
-const getArticles = async () => {
-  const fetcher = await fetch("https://dev.to/api/articles").then(toJSON);
-  return fetcher;
-};
-}; */
-
 const toJSON = (_) => _.json();
 
 export default (type, url, params) => {
@@ -31,19 +20,19 @@ export default (type, url, params) => {
       }
     },
     PUT: async () => {
-      try {
-        var formdata = new FormData();
-        Object.keys(params).map((p) => formdata.append(p, params[p]));
-        var requestOptions = {
-          method: "PUT",
-          body: formdata,
-          redirect: "follow",
-        };
+      var formdata = new FormData();
+      Object.keys(params).map((p) => formdata.append(p, params[p]));
+      var requestOptions = {
+        method: "PUT",
+        body: formdata,
+        redirect: "follow",
+      };
 
-        const fetcher = await fetch(url, requestOptions);
+      const fetcher = await fetch(url, requestOptions);
+      if (fetcher.status != 200) {
+        throw new Error("error");
+      } else {
         return fetcher;
-      } catch (e) {
-        console.log(e);
       }
     },
   };

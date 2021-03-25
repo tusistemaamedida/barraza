@@ -1,5 +1,5 @@
 import { notification, PageHeader } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "react-trello";
 import { useMutation } from "react-query";
 
@@ -7,9 +7,9 @@ import styles from "../app.module.css";
 import { requestParser } from "../../../utils";
 
 export default ({ column, street, data }) => {
+  const [currentData, setCurrentData] = useState(null);
   const [cardId, setCardId] = useState(null);
   const updateCard = useMutation(async (event) => {
-    console.log(event);
     return requestParser(
       "PUT",
       `http://localhost:3100/v1/deposits/card/${cardId}`,
@@ -17,10 +17,30 @@ export default ({ column, street, data }) => {
     );
   });
 
+  updateCard.isError &&
+    notification.error({
+      description: "No puede haber 2 pallets en una misma columna",
+    });
+
+  useEffect(() => {
+    console.log(data);
+    setCurrentData(data);
+  }, [data]);
+
   let events = {
     onDataChange: (e) => {
-      /*   console.log("columana", column, "street", street, "data", e); */
-      //onSetData(e);
+      if (e.lanes.length > 0) {
+        let newData = {
+          lanes: e.lanes.map((currentL, i) => {
+            if (currentL.cards.length > 0 && i != 0) {
+              return { ...currentL, droppable: false };
+            } else {
+              return { ...currentL, droppable: true };
+            }
+          }),
+        };
+        setCurrentData(newData);
+      }
     },
     handleDragEnd: (
       cardId,
@@ -39,26 +59,17 @@ export default ({ column, street, data }) => {
         column: column.toString(),
         street: street.toString(),
       });
-      //street, column, position = targetLaneId, cardId
-      console.log(cardId, targetLaneId, column, street);
     },
-    /*  onCardMoveAcrossLanes: (fromLaneId, toLaneId, cardId, index) =>
-          console.log(fromLaneId, toLaneId, cardId, index), */
   };
 
   return (
     <>
       <PageHeader title={`CALLE ${street} - ${column}`} />
-      {console.log(data)}
-      {data && (
+      {currentData && (
         <Board
           {...events}
           className={styles.boardContainer}
-          data={data}
-          /*  onCardMoveAcrossLanes={(fromLaneId, toLaneId, cardId, index) =>
-            console.log(fromLaneId, toLaneId, cardId, index)
-          }
-          onLaneUpdate={(laneId, data) => console.log(laneId, data)} */
+          data={currentData}
           id={`board${column}`}
         />
       )}
