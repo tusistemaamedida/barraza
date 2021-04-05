@@ -69,3 +69,8 @@ h3 {
 .indicator {
   padding: 20vh 0px 0px 50%;
 }
+
+.buttonDrawer {
+  position: absolute;
+  bottom: 20px;
+}

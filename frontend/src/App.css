@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 body {
   font-family: "Montserrat" !important;
@@ -22,7 +22,7 @@ body {
 }
 
 .ant-btn-primary {
-  background-color:  #282E37;
+  background-color: #282e37;
   text-transform: uppercase;
   font-size: 18px;
 }
@@ -35,23 +35,22 @@ body {
   background-color: #54595e;
 }
 
-
-.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #cd164f !important;
 }
 
-.ant-drawer-content-wrapper{
+.ant-drawer-content-wrapper {
   min-width: 520px;
 }
 
-label{
+label {
   font-size: 13px !important;
   color: #8d8c8c !important;
 }
 
-
-@media screen and (max-width: 520px){
+@media screen and (max-width: 520px) {
   .ant-drawer-content-wrapper {
-      width: 100%;
+    min-width: 100% !important;
+    width: 100%;
   }
 }
