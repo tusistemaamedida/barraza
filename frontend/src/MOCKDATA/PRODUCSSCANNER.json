@@ -1,0 +1,98 @@
+[
+  {
+    "id": "12312312aaa3",
+    "name": "Horma de queso de 3kg. x 200",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": "12312312ddd3",
+    "name": "Horma de queso 5kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": "12312312ccc3",
+    "name": "Horma de queso 1kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 4,
+    "name": "Horma de queso 10kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 5,
+    "name": "Horma de queso 20kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 6,
+    "name": "Horma de queso 6kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 7,
+    "name": "Horma de queso de 3kg. x 200",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 8,
+    "name": "Horma de queso 5kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 9,
+    "name": "Horma de queso 1kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 10,
+    "name": "Horma de queso 10kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 11,
+    "name": "Horma de queso 20kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  },
+  {
+    "id": 12,
+    "name": "Horma de queso 6kg.",
+    "productCode": "3201230120321",
+    "boxCode": "102303003",
+    "palletCode": "300003000",
+    "scanning": false
+  }
+]

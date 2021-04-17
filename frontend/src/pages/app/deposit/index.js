@@ -16,8 +16,6 @@ export default (params) => {
     street: "1",
     column: "A",
   });
-  const [palletsAvailable, setPalletsAvailable] = useState([]);
-  const [palletsCurrent, setPalletsCurrent] = useState([]);
 
   const { data: dataCurrent, isLoading: lCD, refetch } = useQuery(
     "depositCurrent",

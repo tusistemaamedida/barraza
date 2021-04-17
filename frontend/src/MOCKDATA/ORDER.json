@@ -1,0 +1,19 @@
+[
+  {
+    "id": "0000000011",
+    "client": "Quesería 'El Quesito'",
+    "status": "En armado",
+    "products": [{
+      "quantity": 150,
+      "productCode": "12312343125fdasf",
+      "name": "Queso holanda barraza x 3kg.",
+      "scanning": 30
+    },
+    {
+      "quantity": 50,
+      "productCode": "12312343125fdasf",
+      "name": "Queso sardo barraza x 3kg.",
+      "scanning": 0
+    }]
+  }
+]

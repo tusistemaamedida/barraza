@@ -74,3 +74,12 @@ h3 {
   position: absolute;
   bottom: 20px;
 }
+
+.countScanning {
+  text-align: center;
+}
+
+.countScanning span {
+  padding: 10px;
+  font-size: 20px !important;
+}

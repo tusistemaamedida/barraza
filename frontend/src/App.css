@@ -48,6 +48,21 @@ label {
   color: #8d8c8c !important;
 }
 
+.text-muted {
+  color: #b4b4b4;
+}
+
+.checkbox-card-product .ant-checkbox {
+  position: absolute !important;
+  top: 40px !important;
+  z-index: 1 !important;
+  right: 15px;
+}
+
+.ant-drawer-body .ant-page-header {
+  padding-left: 0px !important;
+}
+
 @media screen and (max-width: 520px) {
   .ant-drawer-content-wrapper {
     min-width: 100% !important;

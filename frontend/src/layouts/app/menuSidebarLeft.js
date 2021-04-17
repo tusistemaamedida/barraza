@@ -8,6 +8,8 @@ import {
   LogoutOutlined,
   AppstoreOutlined,
   AppstoreAddOutlined,
+  BuildOutlined,
+  FileOutlined,
 } from "@ant-design/icons";
 
 import styles from "./index.module.css";
@@ -39,9 +41,15 @@ export default () => {
       </Menu.Item>
       <Menu.Item
         key='/deposit'
-        icon={<AppstoreOutlined className={styles.iconSidebar} />}
+        icon={<BuildOutlined className={styles.iconSidebar} />}
       >
         <NavLink to='/deposit'>Depósito</NavLink>
+      </Menu.Item>
+      <Menu.Item
+        key='/orders'
+        icon={<FileOutlined className={styles.iconSidebar} />}
+      >
+        <NavLink to='/orders'>Órdenes</NavLink>
       </Menu.Item>
       <Menu.Item
         key='/users'
@@ -49,6 +57,7 @@ export default () => {
       >
         <NavLink to='/users'>Usuarios</NavLink>
       </Menu.Item>
+
       <Divider />
       <Menu.Item
         key='/profile'
