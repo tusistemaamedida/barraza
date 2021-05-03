@@ -35,6 +35,25 @@ export default (type, url, params) => {
         return fetcher;
       }
     },
+    POST: async () => {
+      try {
+        var formdata = new FormData();
+        Object.keys(params).map((p) => formdata.append(p, params[p]));
+        var requestOptions = {
+          method: "POST",
+          body: formdata,
+          redirect: "follow",
+        };
+
+        const fetcher = await fetch(url, requestOptions).then(toJSON);
+        if (fetcher.statusCode != 200) {
+          throw fetcher.body.message;
+        }
+        return fetcher;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
   };
 
   if (type === "GET") {
