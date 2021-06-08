@@ -16,22 +16,71 @@ import {
   DownOutlined,
   DropboxOutlined,
   EyeOutlined,
+  LoadingOutlined,
   SisternodeOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 import styles from "../app.module.css";
 import AppLayout from "../../../layouts/app/app";
-import CreateNewOrder from "./drawers/new-order";
+import ViewOrder from "./drawers/view";
 import ConfirmSelection from "./drawers/selection-confirm";
 import DespachForm from "./drawers/despach";
-import ORDERSMOCK from "../../../MOCKDATA/ORDERS.json";
-import { Link } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { requestParser } from "../../../utils";
+import OrdersList from "./Orders.class";
 
 const { Header, Content } = Layout;
 
 export default () => {
-  const [drawerOrder, setDrawerOrder] = useState(false);
   const [ordersSelected, setOrdersSelected] = useState([]);
+  const queryClient = useQueryClient();
+  const responseOrders = useQuery(
+    "orders",
+    requestParser("GET", "http://localhost:3100/v1/orders")
+  );
+
+  const updateProduct = useMutation(
+    async (values) => {
+      await requestParser(
+        "PUT",
+        `http://localhost:3100/V1/orders/sendToPreparation`,
+        values
+      );
+    },
+    {
+      onSuccess() {
+        queryClient.invalidateQueries("orders");
+      },
+    }
+  );
+
+  const sendToPreparations = () => {
+    updateProduct.mutate({
+      orders: ordersSelected.map((o) => o._id),
+      status: "EN PREPARACION",
+    });
+  };
+
+  return (
+    <OrdersPage
+      responseOrders={responseOrders}
+      sendToPreparations={sendToPreparations}
+      ordersSelected={ordersSelected}
+      setOrdersSelected={setOrdersSelected}
+    />
+  );
+};
+
+const OrdersPage = (props) => {
+  const {
+    responseOrders,
+    sendToPreparations,
+    ordersSelected,
+    setOrdersSelected,
+  } = props;
+  const [drawerOrder, setDrawerOrder] = useState(false);
+  const [orderViewSelected, setOrderViewSelected] = useState(null);
   const [drawerSelection, setDrawerSelection] = useState(false);
   const [drawerDistpach, setDrawerDistpach] = useState(false);
 
@@ -43,13 +92,12 @@ export default () => {
       <Content className={styles.content}>
         <div className={styles.navAction}>
           <div className={styles.actionButtonsNav}>
-            <Button
-              style={{ float: "right" }}
-              type='primary'
-              onClick={() => setDrawerOrder(true)}
-            >
-              Nuevo
-            </Button>
+            <Link to='/preparations'>
+              <Button style={{ float: "right" }} type='primary'>
+                Listado
+              </Button>
+            </Link>
+
             <Button
               style={{ float: "right", marginRight: "20px" }}
               type='primary'
@@ -61,24 +109,37 @@ export default () => {
           </div>
         </div>
         <Checkbox.Group
-          onChange={(selection) => setOrdersSelected(selection)}
+          onChange={(selection) => {
+            let ordersSelecteds = selection.map((s) =>
+              responseOrders.data.body.find((o) => o._id === s)
+            );
+            setOrdersSelected(ordersSelecteds);
+          }}
           style={{ width: "100%" }}
         >
           <List
-            /* loading={{
-            indicator: <LoadingOutlined type='loading' />,
-          }} */
-            dataSource={ORDERSMOCK}
+            loading={{
+              spinning: responseOrders.isLoading,
+              indicator: <LoadingOutlined type='loading' />,
+            }}
+            dataSource={
+              responseOrders.isSuccess && responseOrders.data.body.length > 0
+                ? responseOrders.data.body.map((o) => new OrdersList(o))
+                : []
+            }
             renderItem={(item) => (
               <List.Item>
                 <Row align='middle' style={{ width: "100%" }}>
                   <Col span={1}>
-                    <Checkbox value={item.id} />
+                    <Checkbox
+                      disabled={item.status !== "SOLICITADO"}
+                      value={item._id}
+                    />
                   </Col>
                   <Col span={7}>
                     {" "}
                     <span style={{ fontSize: "18px" }}>
-                      Pedido nro. {item.id}
+                      Pedido nro. {item.number}
                     </span>
                     <br />
                     <span>
@@ -86,19 +147,27 @@ export default () => {
                     </span>
                     <br />
                     <span className='text-muted'>
-                      Actualizado el {item.updateAt}
+                      Creado el {item.created_at}
                     </span>
                   </Col>
                   <Col span={6}>
-                    {" "}
-                    <Tag color='green'>Solicitud enviada</Tag>
+                    <Tag color={item.handleStatus.background}>
+                      {item.handleStatus.label}
+                    </Tag>
                   </Col>
-                  <Col span={8}> Actualizado el {item.updateAt}</Col>
+                  <Col span={8}> Actualizado el {item.updated_at}</Col>
                   <Col span={2}>
                     <Dropdown
                       overlay={
                         <Menu>
-                          <Menu.Item key='1' icon={<EyeOutlined />}>
+                          <Menu.Item
+                            key='1'
+                            icon={<EyeOutlined />}
+                            onClick={() => {
+                              setOrderViewSelected(item);
+                              setDrawerOrder(true);
+                            }}
+                          >
                             Ver pedido
                           </Menu.Item>
                           <Menu.Item key='2' icon={<SisternodeOutlined />}>
@@ -135,7 +204,10 @@ export default () => {
           className={styles.drawer}
           destroyOnClose
         >
-          <CreateNewOrder onClose={() => setDrawerOrder(false)} />
+          <ViewOrder
+            orderViewSelected={orderViewSelected}
+            onClose={() => setDrawerOrder(false)}
+          />
         </Drawer>
         <Drawer
           visible={drawerSelection}
@@ -145,11 +217,9 @@ export default () => {
           footer={
             <Row gutter={20}>
               <Col md={15} sm={24}>
-                <Link to='/preparations'>
-                  <Button block type='primary'>
-                    Preparar
-                  </Button>
-                </Link>
+                <Button block type='primary' onClick={sendToPreparations}>
+                  Preparar
+                </Button>
               </Col>
               <Col md={9} sm={24}>
                 {" "}

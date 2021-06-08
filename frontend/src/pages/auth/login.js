@@ -5,12 +5,19 @@ import Layout from "./layout";
 import styles from "./index.module.css";
 import { useMutation } from "react-query";
 import { requestParser } from "../../utils";
+import { Redirect, useHistory } from "react-router-dom";
 
 export default () => {
+  const history = useHistory()
   message.config({ maxCount: 1 });
 
   const login = useMutation(async (values) => {
-    await requestParser("POST", "http://localhost:3100/login", values);
+    const result = await requestParser("POST", "http://localhost:3100/login", values);
+    console.log(result)
+    if(result.statusCode == 200){
+      localStorage.setItem('jwt', result.body.token)
+      history.push('/home')
+    }
   });
 
   const onFinish = (values) => {

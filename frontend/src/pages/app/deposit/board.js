@@ -1,15 +1,25 @@
-import { notification, PageHeader } from "antd";
+import { Drawer, notification, PageHeader } from "antd";
 import React, { useEffect, useState } from "react";
 import Board from "react-trello";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 import styles from "../app.module.css";
 import { requestParser } from "../../../utils";
 
 export default ({ column, street, data }) => {
   const [currentData, setCurrentData] = useState(null);
+  const [drawerDetailsPallet, setDrawerDetailsPallet] = useState(false);
   const [cardId, setCardId] = useState(null);
+
   const updateCard = useMutation(async (event) => {
+    return requestParser(
+      "PUT",
+      `http://localhost:3100/v1/deposits/card/${cardId}`,
+      event
+    );
+  });
+
+  const getDetailsCard = useQuery(async (event) => {
     return requestParser(
       "PUT",
       `http://localhost:3100/v1/deposits/card/${cardId}`,
@@ -32,7 +42,7 @@ export default ({ column, street, data }) => {
       if (e.lanes.length > 0) {
         let newData = {
           lanes: e.lanes.map((currentL, i) => {
-            if (currentL.cards.length > 0 && i != 0) {
+            if (currentL.cards.length > 0 && i !== 0) {
               return { ...currentL, droppable: false };
             } else {
               return { ...currentL, droppable: true };
@@ -60,6 +70,9 @@ export default ({ column, street, data }) => {
         street: street.toString(),
       });
     },
+    onCardClick(cardId, metadata, laneId) {
+      console.log(cardId, metadata, laneId);
+    },
   };
 
   return (
@@ -73,6 +86,9 @@ export default ({ column, street, data }) => {
           id={`board${column}`}
         />
       )}
+      <Drawer visible={drawerDetailsPallet}>
+        hola{console.log(currentData)}
+      </Drawer>
     </>
   );
 };

@@ -20,6 +20,7 @@ routes.post("/", async (req, resp) => {
   let { body } = req;
   try {
     let data = await ctrDeposits.save(body);
+
     if (data === 0) {
       return resp
         .status(401)
@@ -39,7 +40,22 @@ routes.post("/", async (req, resp) => {
 routes.put("/card/:id", async (req, resp) => {
   let { body } = req;
   let { id } = req.params;
-  console.log(body);
+  try {
+    let data = await ctrDeposits.updateCard(body, id);
+    if (data === false) {
+      return resp
+        .status(403)
+        .send(util.getSuccessMsg("Hay un registro en la misma columna", 403));
+    }
+    return resp.status(200).send(util.getSuccessMsg("Register updated", 201));
+  } catch (error) {
+    resp.status(500).send(util.getErrorMsg(error));
+  }
+});
+
+routes.get("/card/:id", async (req, resp) => {
+  let { body } = req;
+  let { id } = req.params;
   try {
     let data = await ctrDeposits.updateCard(body, id);
     if (data === false) {

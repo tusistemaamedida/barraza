@@ -46,7 +46,26 @@ export default (type, url, params) => {
         };
 
         const fetcher = await fetch(url, requestOptions).then(toJSON);
-        if (fetcher.statusCode != 200) {
+        if (fetcher.statusCode !== 200 && fetcher.statusCode !== 201) {
+          throw fetcher.body.message;
+        }
+        return fetcher;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    DELETE: async () => {
+      try {
+        var formdata = new FormData();
+        Object.keys(params).map((p) => formdata.append(p, params[p]));
+        var requestOptions = {
+          method: "DELETE",
+          body: formdata,
+          redirect: "follow",
+        };
+
+        const fetcher = await fetch(url, requestOptions).then(toJSON);
+        if (fetcher.statusCode !== 200 && fetcher.statusCode !== 201) {
           throw fetcher.body.message;
         }
         return fetcher;

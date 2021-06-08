@@ -1,0 +1,19 @@
+
+ReferenceError: mongoose is not defined
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:113:13
+    at Array.map (<anonymous>)
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:101:29
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+
+ReferenceError: mongoose is not defined
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:113:13
+    at Array.map (<anonymous>)
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:101:29
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+
+ReferenceError: mongoose is not defined
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:113:13
+    at Array.map (<anonymous>)
+    at /Users/Admin/Documents/apps/s4b/barraza/backend/routes/orders.js:101:29
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+

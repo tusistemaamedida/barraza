@@ -10,10 +10,11 @@ export default ({ selection }) => {
       <Divider />
       {selection.map((s) => (
         <Row>
-          <Col span={16}>{s}</Col>
+          {console.log(s.number)}
+          <Col span={16}>{s.number}</Col>
           <Col span={8}>
             {" "}
-            <Tag color='blue'>En preparación</Tag>
+            <Tag color='blue'>Enviar a preparación</Tag>
           </Col>
           <Divider />
         </Row>
