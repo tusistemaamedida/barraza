@@ -4,6 +4,7 @@ const moment = require("moment");
 const fs = require("fs");
 
 const Deposits = require("../models/deposit");
+const Orders = require("../models/orders");
 const productsDeposit = require("../models/productsDeposit");
 const ctrlProduct = require("./products");
 
@@ -16,7 +17,7 @@ async function getDeposit(column, street) {
 }
 
 async function getDepositById(_id) {
-  return await Deposits.find({ _id });
+  return await Deposits.findById(_id);
 }
 
 async function save(body) {
@@ -29,6 +30,7 @@ async function save(body) {
       }
     }
 
+    console.log(body.products);
     const products = JSON.parse(body.products);
 
     try {
@@ -122,15 +124,29 @@ async function updateCard(body, id) {
 }
 
 const _generateDescriptionPallet = (products) => {
-  let descriptionArray = [],
-    description = "",
-    prev;
+  let description = "";
 
   products.sort((a, b) => {
     return parseInt(a.ID_Articulo) - parseInt(b.ID_Articulo);
   });
 
-  //quiero retornar un array de tipo : "[{name: "Producto 1", quantity: 200},{name: "Producto 2", quantity: 100}]
+  let descriptionArray = getProductsAndQuantities(products);
+
+  descriptionArray.map((d) => {
+    description = `${description}${d.name} x ${d.quantity} unid.\n`;
+  });
+
+  return description;
+};
+
+/**
+ *
+ * @returns Un array con los nombres y las cantidades, tipo : "[{name: "Producto 1", quantity: 200},{name: "Producto 2", quantity: 100}]
+ */
+const getProductsAndQuantities = (products) => {
+  let prev,
+    descriptionArray = [];
+
   for (let index = 0; index < products.length; index++) {
     if (products[index].ID_Articulo !== prev) {
       descriptionArray.push({ name: products[index].nombre, quantity: 1 });
@@ -142,12 +158,7 @@ const _generateDescriptionPallet = (products) => {
 
     prev = products[index].ID_Articulo;
   }
-
-  descriptionArray.map((d) => {
-    description = `${description}${d.name} x ${d.quantity} unid.\n`;
-  });
-
-  return description;
+  return descriptionArray;
 };
 
 const verifyIfCompleteTimeInCamera = async () => {
@@ -200,12 +211,60 @@ const setOrderAndPreparationById = async (idProduct, order, preparation) => {
   }
 };
 
+const asociatedPalletDispatch = async (order, code, quantity, pallet) => {
+  try {
+    const products = await productsDeposit
+      .find({
+        order: mongoose.Types.ObjectId(order),
+        ID_Articulo: code,
+        pallet_dispatch: null,
+        scan_preparation: true,
+      })
+      .limit(parseInt(quantity));
+
+    const productsUpdates = await productsDeposit.updateMany(
+      { _id: { $in: products.map((p) => p._id) } },
+      { pallet_dispatch: pallet }
+    );
+
+    if (productsUpdates.nModified > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
+const disassociatePalletDispatch = async (id) => {
+  try {
+    const productsUpdates = await productsDeposit.findByIdAndUpdate(id, {
+      pallet_dispatch: null,
+    });
+
+    await Orders.findByIdAndUpdate(productsUpdates.order, {
+      status: "PREPARED",
+    });
+
+    console.log("productsUpdates", productsUpdates);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
 module.exports = {
   getDeposit,
+  getDepositById,
   save,
   updateCard,
   verifyIfCompleteTimeInCamera,
   getAvailableForPreparationsByCode,
   sortByDateOfEntry,
   setOrderAndPreparationById,
+  asociatedPalletDispatch,
+  disassociatePalletDispatch,
 };

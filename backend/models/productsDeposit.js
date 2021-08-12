@@ -14,7 +14,7 @@ let products = new Schema({
   deposit: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "Deposit",
+    ref: "Deposits",
   },
   created_at: { type: Date, default: Date.now },
   deleted_at: {
@@ -37,6 +37,17 @@ let products = new Schema({
     type: Schema.Types.ObjectId,
     default: null,
     ref: "Preparations",
+  },
+  scan_preparation: {
+    type: Boolean,
+    default: false,
+  },
+  pallet_dispatch: {
+    type: String,
+    default: null,
+  },
+  date_dispatch: {
+    type: Date,
   },
 });
 

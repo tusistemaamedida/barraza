@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let OrdersSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-  },
   number: {
     type: String,
     require: [true, "Se requiere un nro. de pedido"],

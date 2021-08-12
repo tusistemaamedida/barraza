@@ -1,0 +1,270 @@
+[
+  {
+    "code": "1",
+    "products": [
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },{
+        "ID_Articulo": "1",
+        "nombre": "Queso barraza x 1kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "2",
+        "nombre": "Queso barraza x 2kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "2",
+        "nombre": "Queso barraza x 2kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "2",
+        "nombre": "Queso barraza x 2kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "2",
+        "nombre": "Queso barraza x 2kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+      {
+        "ID_Articulo": "2",
+        "nombre": "Queso barraza x 2kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L1",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART1",
+        "CobBarraCaja_Int": "BOX1"
+      },
+
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX3"
+      },
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX3"
+      },
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX3"
+      },
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX3"
+      },
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX3"
+      },
+      {
+        "ID_Articulo": "3",
+        "nombre": "Queso barraza x 3kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L3",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART3",
+        "CobBarraCaja_Int": "BOX1"
+      },{
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 0.95,
+        "FechaPesaje": "String",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      },
+      {
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      },
+      {
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      },
+      {
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      },
+      {
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      },
+      {
+        "ID_Articulo": "4",
+        "nombre": "Queso barraza x 4kg.",
+        "peso": 2.15,
+        "FechaPesaje": "2021-06-09T15:01:19+00:00",
+        "HoraPesaje": "String",
+        "lote": "L4",
+        "FechaElaboracion": "String",
+        "CobBarraArt_Int": "ART4",
+        "CobBarraCaja_Int": "BOX4"
+      }
+    ]
+  }
+]

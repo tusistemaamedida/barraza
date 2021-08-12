@@ -73,6 +73,22 @@ export default (type, url, params) => {
         throw new Error(e);
       }
     },
+    PATCH: async () => {
+      var formdata = new FormData();
+      Object.keys(params).map((p) => formdata.append(p, params[p]));
+      var requestOptions = {
+        method: "PATCH",
+        body: formdata,
+        redirect: "follow",
+      };
+
+      const fetcher = await fetch(url, requestOptions);
+      if (fetcher.status != 200) {
+        throw new Error("error");
+      } else {
+        return fetcher;
+      }
+    },
   };
 
   if (type === "GET") {

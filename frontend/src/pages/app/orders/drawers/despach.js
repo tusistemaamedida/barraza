@@ -11,15 +11,32 @@ import {
 } from "antd";
 import React from "react";
 
-export default ({ onClose }) => {
+export default ({ onClose, selection }) => {
   const [form] = Form.useForm();
+  /*   const responseOrders = useQuery(
+    "orders",
+    requestParser("GET", "http://localhost:3100/v1/orders")
+  ); */
+
+  const despachFormProps = { onClose, selection, form };
+  return <DespachForm {...despachFormProps} />;
+};
+
+const DespachForm = (props) => {
+  const { onClose, form, selection } = props;
+
   return (
     <>
       <PageHeader progressDot title='Información de despacho' />
       <Form form={form} layout='vertical'>
         <Form.Item label='Pallets asociados'>
-          <Tag color='#108ee9'>3000330</Tag>
-          <Tag color='#108ee9'>55000550</Tag>
+          <Tag color='green'>3000330</Tag>
+        </Form.Item>
+        <Form.Item label='Órdenes asociadas'>
+          {console.log(selection)}
+          {selection.map((s) => (
+            <Tag color='#108ee9'>{s.number}</Tag>
+          ))}
         </Form.Item>
         <Form.Item label='Nombre completo del chofer' name='nombreChofer'>
           <Input size='large' />

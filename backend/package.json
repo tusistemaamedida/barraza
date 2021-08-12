@@ -22,6 +22,7 @@
     "mongoose": "^5.11.12",
     "mongoose-unique-validator": "^2.0.3",
     "node-cron": "^3.0.0",
+    "pdfkit": "^0.12.1",
     "underscore": "^1.12.0",
     "uuid4": "^2.0.2",
     "uuidv4": "^6.2.6"

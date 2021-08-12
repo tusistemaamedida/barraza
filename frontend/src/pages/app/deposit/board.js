@@ -5,11 +5,13 @@ import { useMutation, useQuery } from "react-query";
 
 import styles from "../app.module.css";
 import { requestParser } from "../../../utils";
+import ListProducts from "./list-products";
 
 export default ({ column, street, data }) => {
   const [currentData, setCurrentData] = useState(null);
   const [drawerDetailsPallet, setDrawerDetailsPallet] = useState(false);
   const [cardId, setCardId] = useState(null);
+  const [depositDetailSelected, setDepositDetailSelected] = useState(null);
 
   const updateCard = useMutation(async (event) => {
     return requestParser(
@@ -70,8 +72,9 @@ export default ({ column, street, data }) => {
         street: street.toString(),
       });
     },
-    onCardClick(cardId, metadata, laneId) {
-      console.log(cardId, metadata, laneId);
+    onCardClick(cardId) {
+      setDepositDetailSelected(cardId);
+      setDrawerDetailsPallet(true);
     },
   };
 
@@ -86,8 +89,13 @@ export default ({ column, street, data }) => {
           id={`board${column}`}
         />
       )}
-      <Drawer visible={drawerDetailsPallet}>
-        hola{console.log(currentData)}
+      <Drawer
+        visible={drawerDetailsPallet}
+        onClose={() => setDrawerDetailsPallet(false)}
+        destroyOnClose
+      >
+        <PageHeader title='Descripción del pallet' />
+        <ListProducts id={depositDetailSelected} />
       </Drawer>
     </>
   );

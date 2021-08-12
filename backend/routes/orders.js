@@ -19,6 +19,17 @@ routes.get("/", pagination, async (req, resp) => {
   }
 });
 
+//obtener el listado de productos escaneados segun una orden
+routes.get("/products-armeds&ids=:ids", async (req, resp) => {
+  try {
+    let { ids } = req.params;
+    let data = await ctrOrders.getProductsByOrderId(ids.split(","));
+    resp.status(200).send(util.getSuccessMsg(data, 200));
+  } catch (error) {
+    resp.status(500).send(util.getErrorMsg(error));
+  }
+});
+
 //agrego un pedido
 routes.post("/", async (req, resp) => {
   let { body } = req;
@@ -128,7 +139,7 @@ routes.put("/sendToPreparation", async (req, resp) => {
       );
     }
 
-    //await ctrOrders.updateManyStatus(ids, body.status);
+    await ctrOrders.updateManyStatus(ids, body.status);
 
     return resp.status(200).send(util.getSuccessMsg("Productos editados", 200));
   } catch (error) {
@@ -153,6 +164,65 @@ routes.put("/:id", async (req, resp) => {
         .send(util.getSuccessMsg("Register not found", 200));
     }
     return resp.status(200).send(util.getSuccessMsg("Register updated", 201));
+  } catch (error) {
+    resp.status(500).send(util.getErrorMsg(error));
+  }
+});
+
+routes.put("/:id/assing-pallet", async (req, resp) => {
+  try {
+    const {
+      params: { id },
+      body,
+    } = req;
+
+    if (!body.code || !body.quantity || !body.pallet) {
+      throw new Error("No se encontraron productos ");
+    }
+
+    const result = await ctrDeposit.asociatedPalletDispatch(
+      id,
+      body.code,
+      body.quantity,
+      body.pallet
+    );
+
+    if (!result) {
+      throw new Error("No se encontraron productos ");
+    }
+
+    await ctrOrders.checkIfOrderComplete(id);
+
+    return resp.status(200).send(util.getSuccessMsg(true, 200));
+  } catch (error) {
+    resp.status(500).send(util.getErrorMsg(error));
+  }
+});
+
+routes.get("/:id/products-armed-details/", async (req, resp) => {
+  try {
+    const {
+      params: { id },
+    } = req;
+
+    const totals = await ctrOrders.getProductsAndTotalPreparedByOrderId(id);
+
+    return resp.status(200).send(util.getSuccessMsg(totals, 200));
+  } catch (error) {
+    resp.status(500).send(util.getErrorMsg(error));
+  }
+});
+
+routes.patch("/unassing-pallet", async (req, resp) => {
+  try {
+    const { body } = req;
+    const result = await ctrDeposit.disassociatePalletDispatch(body.id);
+
+    if (!result) {
+      throw new Error("No se encontraron productos ");
+    }
+
+    return resp.status(200).send(util.getSuccessMsg(true, 200));
   } catch (error) {
     resp.status(500).send(util.getErrorMsg(error));
   }

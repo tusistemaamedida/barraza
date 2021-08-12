@@ -11,7 +11,7 @@ let products = new Schema({
   },
   description: {
     type: String,
-    required: [true, "Se requiere una descripción"],
+    required: [true, "Se requiere una descripcion"],
   },
   rnpa: {
     type: String,

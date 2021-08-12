@@ -25,16 +25,30 @@ export default class {
     switch (this.status) {
       case "SOLICITADO":
         return {
-          background: "yellow",
+          background: "purple",
           textColor: "white",
           label: "SOLICITADO",
         };
 
       case "EN PREPARACION":
         return {
-          background: "blue",
+          background: "orange",
           textColor: "white",
           label: "EN PREPARACIÓN",
+        };
+
+      case "PREPARED":
+        return {
+          background: "blue",
+          textColor: "white",
+          label: "PREPARADO",
+        };
+
+      case "ARMED":
+        return {
+          background: "#2db7f5",
+          textColor: "white",
+          label: "ARMADO",
         };
 
       default:

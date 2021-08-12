@@ -53,17 +53,11 @@ routes.put("/card/:id", async (req, resp) => {
   }
 });
 
-routes.get("/card/:id", async (req, resp) => {
-  let { body } = req;
+routes.get("/:id", async (req, resp) => {
   let { id } = req.params;
   try {
-    let data = await ctrDeposits.updateCard(body, id);
-    if (data === false) {
-      return resp
-        .status(403)
-        .send(util.getSuccessMsg("Hay un registro en la misma columna", 403));
-    }
-    return resp.status(200).send(util.getSuccessMsg("Register updated", 201));
+    let data = await ctrDeposits.getDepositById(id);
+    resp.status(200).send(util.getSuccessMsg(data, 200));
   } catch (error) {
     resp.status(500).send(util.getErrorMsg(error));
   }

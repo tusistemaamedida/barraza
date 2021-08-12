@@ -34,7 +34,9 @@ const { Header, Content } = Layout;
 
 export default () => {
   const [ordersSelected, setOrdersSelected] = useState([]);
+  const [ordersDespachSelected, setOrdersDespachSelected] = useState([]);
   const queryClient = useQueryClient();
+
   const responseOrders = useQuery(
     "orders",
     requestParser("GET", "http://localhost:3100/v1/orders")
@@ -62,14 +64,15 @@ export default () => {
     });
   };
 
-  return (
-    <OrdersPage
-      responseOrders={responseOrders}
-      sendToPreparations={sendToPreparations}
-      ordersSelected={ordersSelected}
-      setOrdersSelected={setOrdersSelected}
-    />
-  );
+  const propsOrderPage = {
+    ordersDespachSelected,
+    setOrdersDespachSelected,
+    responseOrders,
+    sendToPreparations,
+    ordersSelected,
+    setOrdersSelected,
+  };
+  return <OrdersPage {...propsOrderPage} />;
 };
 
 const OrdersPage = (props) => {
@@ -78,7 +81,10 @@ const OrdersPage = (props) => {
     sendToPreparations,
     ordersSelected,
     setOrdersSelected,
+    ordersDespachSelected,
+    setOrdersDespachSelected,
   } = props;
+
   const [drawerOrder, setDrawerOrder] = useState(false);
   const [orderViewSelected, setOrderViewSelected] = useState(null);
   const [drawerSelection, setDrawerSelection] = useState(false);
@@ -110,10 +116,30 @@ const OrdersPage = (props) => {
         </div>
         <Checkbox.Group
           onChange={(selection) => {
+            //busco todas las ordenes de la seleeción
+            let arrayArmed = [],
+              arrayPrepared = [];
+
             let ordersSelecteds = selection.map((s) =>
               responseOrders.data.body.find((o) => o._id === s)
             );
-            setOrdersSelected(ordersSelecteds);
+            //las mapeo, si son PREPARED las mando a un array, SI SON ARMED las mando al array de despacho
+
+            ordersSelecteds.map((os) => {
+              switch (os.status) {
+                case "SOLICITADO":
+                  arrayPrepared = [...arrayPrepared, os];
+                  break;
+                case "ARMED":
+                  arrayArmed = [...arrayArmed, os];
+                  break;
+
+                default:
+                  break;
+              }
+            });
+            setOrdersDespachSelected(arrayArmed);
+            setOrdersSelected(arrayPrepared);
           }}
           style={{ width: "100%" }}
         >
@@ -132,7 +158,9 @@ const OrdersPage = (props) => {
                 <Row align='middle' style={{ width: "100%" }}>
                   <Col span={1}>
                     <Checkbox
-                      disabled={item.status !== "SOLICITADO"}
+                      disabled={
+                        item.status !== "SOLICITADO" && item.status !== "ARMED"
+                      }
                       value={item._id}
                     />
                   </Col>
@@ -170,11 +198,14 @@ const OrdersPage = (props) => {
                           >
                             Ver pedido
                           </Menu.Item>
-                          <Menu.Item key='2' icon={<SisternodeOutlined />}>
-                            <Link to={`orders/armed/${item.id}`}>
-                              Pasar a armado
-                            </Link>
-                          </Menu.Item>
+                          {item.status == "PREPARED" && (
+                            <Menu.Item key='2' icon={<SisternodeOutlined />}>
+                              <Link to={`orders/armed/${item._id}`}>
+                                Pasar a armado
+                              </Link>
+                            </Menu.Item>
+                          )}
+
                           <Menu.Item
                             onClick={() => setDrawerDistpach(true)}
                             key='4'
@@ -182,9 +213,10 @@ const OrdersPage = (props) => {
                           >
                             Despachar
                           </Menu.Item>
-                          <Menu.Item key='3' icon={<DeleteOutlined />}>
+
+                          {/*  <Menu.Item key='3' icon={<DeleteOutlined />}>
                             Eliminar
-                          </Menu.Item>
+                          </Menu.Item> */}
                         </Menu>
                       }
                     >
@@ -241,7 +273,10 @@ const OrdersPage = (props) => {
           className={styles.drawer}
           destroyOnClose
         >
-          <DespachForm onClose={() => setDrawerDistpach(false)} />
+          <DespachForm
+            onClose={() => setDrawerDistpach(false)}
+            selection={ordersDespachSelected}
+          />
         </Drawer>
       </Content>
     </AppLayout>
