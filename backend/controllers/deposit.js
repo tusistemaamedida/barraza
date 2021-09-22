@@ -9,7 +9,7 @@ const productsDeposit = require("../models/productsDeposit");
 const ctrlProduct = require("./products");
 
 async function getDeposit(column, street) {
-  return await Deposits.find({
+  return Deposits.find({
     street: street,
     column: column,
     deleted_at: null,
@@ -17,7 +17,7 @@ async function getDeposit(column, street) {
 }
 
 async function getDepositById(_id) {
-  return await Deposits.findById(_id);
+  return Deposits.findById(_id);
 }
 
 async function save(body) {
